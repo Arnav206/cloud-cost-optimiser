@@ -24,32 +24,32 @@ if not all([DB_NAME, DB_USER, DB_PASSWORD]):
     )
 
 
-
 # Create a PostgreSQL connection URL using SQLAlchemy's URL object
 DATABASE_URL = URL.create(
-drivername="postgresql+psycopg",
-username=DB_USER,
-password=DB_PASSWORD,
-host=DB_HOST,
-port=DB_PORT,
-database=DB_NAME,
+    drivername="postgresql+psycopg",
+    username=DB_USER,
+    password=DB_PASSWORD,
+    host=DB_HOST,
+    port=DB_PORT,
+    database=DB_NAME,
 )
 
 # Create a SQLAlchemy engine using the constructed database URL
 engine = create_engine(
-DATABASE_URL,
-pool_pre_ping=True,
+    DATABASE_URL,
+    pool_pre_ping=True,
 )
 
 # Create a session factory for database interactions
 SessionLocal = sessionmaker(
-bind=engine,
-autoflush=False,
-expire_on_commit=False,
+    bind=engine,
+    autoflush=False,
+    expire_on_commit=False,
 )
 
 # Create a base class for SQLAlchemy models
 Base = declarative_base()
+
 
 # Provide a database session to fastAPI endpoints using dependency injection
 def get_db():
