@@ -1,12 +1,4 @@
-from sqlalchemy import (
-    Column,
-    Integer,
-    String,
-    Numeric,
-    Date,
-    Text,
-    ForeignKey
-)
+from sqlalchemy import Column, Integer, String, Numeric, Date, Text, ForeignKey
 
 from sqlalchemy.orm import relationship
 
@@ -16,6 +8,7 @@ from .database import Base
 # ==========================================
 # 1. PROVIDERS TABLE
 # ==========================================
+
 
 class Provider(Base):
 
@@ -35,17 +28,14 @@ class Provider(Base):
 # 2. REGIONS TABLE
 # ==========================================
 
+
 class Region(Base):
 
     __tablename__ = "regions"
 
     region_id = Column(Integer, primary_key=True, index=True)
 
-    provider_id = Column(
-        Integer,
-        ForeignKey("providers.provider_id"),
-        nullable=False
-    )
+    provider_id = Column(Integer, ForeignKey("providers.provider_id"), nullable=False)
 
     region_name = Column(String, nullable=False)
 
@@ -61,32 +51,27 @@ class Region(Base):
 # 3. SERVICES TABLE
 # ==========================================
 
+
 class Service(Base):
 
     __tablename__ = "services"
 
     service_id = Column(Integer, primary_key=True, index=True)
 
-    provider_id = Column(
-        Integer,
-        ForeignKey("providers.provider_id"),
-        nullable=False
-    )
+    provider_id = Column(Integer, ForeignKey("providers.provider_id"), nullable=False)
 
     service_name = Column(String, nullable=False)
 
     # Relationships
     provider = relationship("Provider", back_populates="services")
 
-    resource_types = relationship(
-        "ResourceType",
-        back_populates="service"
-    )
+    resource_types = relationship("ResourceType", back_populates="service")
 
 
 # ==========================================
 # 4. RESOURCE TYPES TABLE
 # ==========================================
+
 
 class ResourceType(Base):
 
@@ -94,11 +79,7 @@ class ResourceType(Base):
 
     resource_type_id = Column(Integer, primary_key=True, index=True)
 
-    service_id = Column(
-        Integer,
-        ForeignKey("services.service_id"),
-        nullable=False
-    )
+    service_id = Column(Integer, ForeignKey("services.service_id"), nullable=False)
 
     resource_name = Column(String, nullable=False)
 
@@ -120,6 +101,7 @@ class ResourceType(Base):
 # 5. PRICING TABLE
 # ==========================================
 
+
 class Pricing(Base):
 
     __tablename__ = "pricing"
@@ -127,16 +109,10 @@ class Pricing(Base):
     pricing_id = Column(Integer, primary_key=True, index=True)
 
     resource_type_id = Column(
-        Integer,
-        ForeignKey("resource_types.resource_type_id"),
-        nullable=False
+        Integer, ForeignKey("resource_types.resource_type_id"), nullable=False
     )
 
-    region_id = Column(
-        Integer,
-        ForeignKey("regions.region_id"),
-        nullable=False
-    )
+    region_id = Column(Integer, ForeignKey("regions.region_id"), nullable=False)
 
     pricing_model = Column(String, nullable=False)
 
@@ -155,12 +131,6 @@ class Pricing(Base):
     last_verified = Column(Date)
 
     # Relationships
-    resource_type = relationship(
-        "ResourceType",
-        back_populates="pricing"
-    )
+    resource_type = relationship("ResourceType", back_populates="pricing")
 
-    region = relationship(
-        "Region",
-        back_populates="pricing"
-    )
+    region = relationship("Region", back_populates="pricing")
