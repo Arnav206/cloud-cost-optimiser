@@ -1,3 +1,5 @@
+# This file defines the structure of the database tables using SQLAlchemy ORM models. 
+
 from sqlalchemy import Column, Integer, String, Numeric, Date, Text, ForeignKey
 
 from sqlalchemy.orm import relationship
