@@ -1,3 +1,5 @@
+# This file contains the database configuration and connection setup for the FastAPI application.
+
 import os
 from pathlib import Path
 from dotenv import load_dotenv

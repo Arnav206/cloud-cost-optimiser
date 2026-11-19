@@ -1,17 +1,11 @@
-# This file defines the structure of the database tables using SQLAlchemy ORM models. 
+# This file defines the structure of the database tables using SQLAlchemy ORM models.
 
 from sqlalchemy import Column, Integer, String, Numeric, Date, Text, ForeignKey
-
 from sqlalchemy.orm import relationship
-
 from .database import Base
 
 
-# ==========================================
 # 1. PROVIDERS TABLE
-# ==========================================
-
-
 class Provider(Base):
 
     __tablename__ = "providers"
@@ -26,11 +20,7 @@ class Provider(Base):
     services = relationship("Service", back_populates="provider")
 
 
-# ==========================================
 # 2. REGIONS TABLE
-# ==========================================
-
-
 class Region(Base):
 
     __tablename__ = "regions"
@@ -49,11 +39,7 @@ class Region(Base):
     pricing = relationship("Pricing", back_populates="region")
 
 
-# ==========================================
 # 3. SERVICES TABLE
-# ==========================================
-
-
 class Service(Base):
 
     __tablename__ = "services"
@@ -70,11 +56,7 @@ class Service(Base):
     resource_types = relationship("ResourceType", back_populates="service")
 
 
-# ==========================================
 # 4. RESOURCE TYPES TABLE
-# ==========================================
-
-
 class ResourceType(Base):
 
     __tablename__ = "resource_types"
@@ -99,11 +81,7 @@ class ResourceType(Base):
     pricing = relationship("Pricing", back_populates="resource_type")
 
 
-# ==========================================
 # 5. PRICING TABLE
-# ==========================================
-
-
 class Pricing(Base):
 
     __tablename__ = "pricing"

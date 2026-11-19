@@ -1,4 +1,4 @@
-# This code check whether fastAPI can sucessfully connects to PostgresSQL or not.
+# This file checks whether fastAPI can successfully connect to PostgresSQL or not.
 
 from sqlalchemy import text 
 from sqlalchemy.exc import SQLAlchemyError
@@ -18,17 +18,14 @@ def test_database_connection():
 
             # Step 4: Verify the result
             if value == 1:
-                print("===================================")
                 print("DATABASE CONNECTION SUCCESSFUL!")
                 print("PostgreSQL is connected to FastAPI.")
                 print("Database:", engine.url.database)
-                print("===================================")
+    
 
     except SQLAlchemyError as error:
-        print("===================================")
         print("DATABASE CONNECTION FAILED!")
         print("Error:", error)
-        print("===================================")
 
 
 if __name__ == "__main__":
