@@ -25,3 +25,5 @@ def get_providers(db: Session = Depends(get_db)):
     providers = db.query(models.Provider).all()
 
     return providers
+
+
